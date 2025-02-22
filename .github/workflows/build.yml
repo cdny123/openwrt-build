@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p output
           docker build -t openwrt-build .
-          docker run --rm -v $(pwd)/output:/build/bin openwrt-build
+          docker run --rm -v $(pwd)/output:/build/output openwrt-build
           # 列出生成的文件以进行调试
           echo "Generated files in output/ directory:"
           ls -lah output/
