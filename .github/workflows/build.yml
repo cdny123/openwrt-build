@@ -1,0 +1,46 @@
+name: Build OpenWrt Firmware
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 10 * * 3' # 每周三北京时间18点（UTC时间10点）定时自动编译
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Clean up old Actions runs
+        run: |
+          gh run delete --repo ${GITHUB_REPOSITORY} --confirm --status completed
+
+      - name: Clean up old Releases
+        run: |
+          gh release delete $(gh release list --limit 10 | awk '{print $1}') --yes
+
+  build:
+    runs-on: ubuntu-latest
+    needs: cleanup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build OpenWrt Firmware
+        run: |
+          docker build -t openwrt-build .
+          docker run --rm -v $(pwd)/output:/build/bin openwrt-build
+
+      - name: Upload firmware to releases
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.run_number }}-x86_64-{{ github.event_date }}
+          name: ${{ github.run_number }}-x86_64-{{ github.event_date }}
+          files: output/*
