@@ -39,9 +39,8 @@ jobs:
           docker run --rm -v $(pwd)/output:/build/bin openwrt-build
 
       - name: Upload firmware to releases
-        uses: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v1
         with:
-          token: ${{ secrets.REPO_TOKEN }}
-          tag: ${{ github.run_number }}-x86_64-${{ github.event.date }}
-          name: ${{ github.run_number }}-x86_64-${{ github.event.date }}
           files: output/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
