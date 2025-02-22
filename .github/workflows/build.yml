@@ -38,9 +38,15 @@ jobs:
           docker build -t openwrt-build .
           docker run --rm -v $(pwd)/output:/build/bin openwrt-build
 
+      - name: Set Release Tag
+        id: set_tag
+        run: echo "TAG=${{ github.run_number }}-x86_64-$(date +'%Y%m%d')" >> $GITHUB_ENV
+
       - name: Upload firmware to releases
         uses: softprops/action-gh-release@v1
         with:
           files: output/*
+          tag_name: ${{ env.TAG }}
+          release_name: ${{ env.TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
