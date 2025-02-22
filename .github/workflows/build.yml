@@ -17,11 +17,11 @@ jobs:
 
       - name: Clean up old Actions runs
         run: |
-          gh run delete --repo ${GITHUB_REPOSITORY} --confirm --status completed
+          gh run list --limit 100 --json databaseId,status,conclusion | jq -r '.[] | select(.status=="completed") | select(.conclusion=="success") | .databaseId' | while read run_id; do gh run delete "$run_id" -y; done
 
       - name: Clean up old Releases
         run: |
-          gh release delete $(gh release list --limit 10 | awk '{print $1}') --yes
+          gh release list --limit 100 | awk '{print $1}' | while read release_id; do gh release delete "$release_id" -y; done
 
   build:
     runs-on: ubuntu-latest
