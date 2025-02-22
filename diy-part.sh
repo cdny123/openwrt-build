@@ -3,16 +3,12 @@ set -e
 
 # 添加自定义软件源
 echo "src-git custom1 https://github.com/cdny123/openwrt-package1.git" >> feeds.conf.default
-
-# 添加自定义软件包
-#git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/luci-app-lucky
-#git clone --depth 1 https://github.com/lq-wq/luci-app-autoupdate.git package/luci-app-autoupdate
-git clone --depth 1 https://github.com/Jason6111/luci-app-dockerman.git package/luci-app-dockerman
-
-# 添加自定义主题
-git clone --depth 1 https://github.com/sirpdboy/luci-theme-kucat.git package/luci-theme-kucat
-git clone --depth 1 https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom.git package/luci-theme-infinityfreedom
-git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
+echo "src-git luci-app-lucky https://github.com/sirpdboy/luci-app-lucky.git" >> feeds.conf.default
+echo "src-git luci-app-autoupdate https://github.com/lq-wq/luci-app-autoupdate.git" >> feeds.conf.default
+echo "src-git luci-app-dockerman https://github.com/Jason6111/luci-app-dockerman.git" >> feeds.conf.default
+echo "src-git luci-theme-kucat https://github.com/sirpdboy/luci-theme-kucat.git" >> feeds.conf.default
+echo "src-git luci-theme-infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom.git" >> feeds.conf.default
+echo "src-git luci-theme-argon https://github.com/jerrykuku/luci-theme-argon.git" >> feeds.conf.default
 
 # 更换固件内核为6.6
 sed -i 's/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=6.6/g' target/linux/x86/Makefile
@@ -23,7 +19,8 @@ echo "DISTRIB_DESCRIPTION='OpenWrt $(date +%Y-%m-%d)'" > package/base-files/file
 
 # 添加默认主题为argon
 mkdir -p feeds/luci/modules/luci-base/root/etc/config
-sed -i 's/luci.main.mediaurlbase=.*/luci.main.mediaurlbase=\/luci-static\/argon/g' feeds/luci/modules/luci-base/root/etc/config/luci
+echo "config luci 'main'
+        option mediaurlbase '/luci-static/argon'" > feeds/luci/modules/luci-base/root/etc/config/luci
 
 # 下载 OpenClash 和 adguardhome 的内核文件
 mkdir -p files/etc/openclash/core
