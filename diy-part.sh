@@ -5,8 +5,8 @@ set -e
 echo "src-git custom1 https://github.com/cdny123/openwrt-package1.git" >> feeds.conf.default
 
 # 添加自定义软件包
-git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/luci-app-lucky
-git clone --depth 1 https://github.com/lq-wq/luci-app-autoupdate.git package/luci-app-autoupdate
+#git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/luci-app-lucky
+#git clone --depth 1 https://github.com/lq-wq/luci-app-autoupdate.git package/luci-app-autoupdate
 git clone --depth 1 https://github.com/Jason6111/luci-app-dockerman.git package/luci-app-dockerman
 
 # 添加自定义主题
