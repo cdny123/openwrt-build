@@ -31,6 +31,7 @@ curl -L -o files/usr/bin/AdGuardHome https://github.com/AdguardTeam/AdGuardHome/
 
 # 修改 openwrt 后台地址为 192.168.6.1，默认子网掩码：255.255.255.0，修改主机名称为OP-NIT
 mkdir -p package/base-files/files/bin
+echo "config_generate content" > package/base-files/files/bin/config_generate
 sed -i 's/192.168.1.1/192.168.6.1/g' package/base-files/files/bin/config_generate
 sed -i 's/255.255.255.0/255.255.255.0/g' package/base-files/files/bin/config_generate
 sed -i 's/OpenWrt/OP-NIT/g' package/base-files/files/bin/config_generate
