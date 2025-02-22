@@ -35,6 +35,7 @@ jobs:
 
       - name: Build OpenWrt Firmware
         run: |
+          mkdir -p output
           docker build -t openwrt-build .
           docker run --rm -v $(pwd)/output:/build/bin openwrt-build
 
