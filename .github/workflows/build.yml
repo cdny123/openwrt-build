@@ -6,6 +6,7 @@ on:
       - main
   schedule:
     - cron: '0 10 * * 3' # 每周三北京时间18点（UTC时间10点）定时自动编译
+  workflow_dispatch:
 
 jobs:
   cleanup:
