@@ -40,13 +40,14 @@ jobs:
 
       - name: Set Release Tag
         id: set_tag
-        run: echo "TAG=${{ github.run_number }}-x86_64-$(date +'%Y%m%d')" >> $GITHUB_ENV
+        run: |
+          TAG="${{ github.run_number }}-x86_64-$(date +'%Y%m%d')"
+          echo "TAG=$TAG" >> $GITHUB_ENV
 
       - name: Upload firmware to releases
         uses: softprops/action-gh-release@v1
         with:
           files: output/*
           tag_name: ${{ env.TAG }}
-          release_name: ${{ env.TAG }}
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
