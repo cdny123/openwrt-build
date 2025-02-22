@@ -40,7 +40,7 @@ jobs:
       - name: Upload firmware to releases
         uses: ncipollo/release-action@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.run_number }}-x86_64-{{ github.event_date }}
-          name: ${{ github.run_number }}-x86_64-{{ github.event_date }}
+          token: ${{ secrets.REPO_TOKEN }}
+          tag: ${{ github.run_number }}-x86_64-${{ github.event.date }}
+          name: ${{ github.run_number }}-x86_64-${{ github.event.date }}
           files: output/*
