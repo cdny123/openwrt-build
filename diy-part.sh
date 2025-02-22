@@ -19,7 +19,7 @@ sed -i 's/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=6.6/g' target/linux/x86/Makefile
 echo "DISTRIB_DESCRIPTION='OpenWrt $(date +%Y-%m-%d)'" >> package/base-files/files/etc/openwrt_release
 
 # 添加默认主题为argon
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
+sed -i 's/luci.main.mediaurlbase=.*/luci.main.mediaurlbase=\/luci-static\/argon/g' feeds/luci/modules/luci-base/root/etc/config/luci
 
 # 下载 OpenClash 和 adguardhome 的内核文件
 mkdir -p files/etc/openclash/core
@@ -45,3 +45,9 @@ echo "vm.min_free_kbytes=65536" >> package/base-files/files/etc/sysctl.conf
 # 优化IRQ和CPU调度
 echo "kernel.sched_migration_cost_ns=5000000" >> package/base-files/files/etc/sysctl.conf
 echo "kernel.sched_autogroup_enabled=1" >> package/base-files/files/etc/sysctl.conf
+
+# 运行 OpenWrt 编译
+make defconfig
+make -j$(nproc)
+# 将生成的固件文件复制到 /build/bin
+cp bin/targets/x86/64/* /build/bin/
