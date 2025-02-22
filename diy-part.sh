@@ -19,7 +19,7 @@ sed -i 's/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=6.6/g' target/linux/x86/Makefile
 echo "DISTRIB_DESCRIPTION='OpenWrt $(date +%Y-%m-%d)'" >> package/base-files/files/etc/openwrt_release
 
 # 添加默认主题为argon
-sed -i 's/luci.main.mediaurlbase=.*/luci.main.mediaurlbase=\/luci-static\/argon/g' feeds/luci/modules/luci-base/root/etc/config/luci
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
 
 # 下载 OpenClash 和 adguardhome 的内核文件
 mkdir -p files/etc/openclash/core
