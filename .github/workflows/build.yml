@@ -38,6 +38,10 @@ jobs:
           mkdir -p output
           docker build -t openwrt-build .
           docker run --rm -v $(pwd)/output:/build/bin openwrt-build
+          # 重命名生成的固件文件
+          for file in output/*; do
+            mv "$file" "output/$(basename "$file" | sed 's/^/x86_64-$(date +%Y%m%d)-/')"
+          done
 
       - name: Set Release Tag
         id: set_tag
@@ -51,4 +55,4 @@ jobs:
           files: output/*
           tag_name: ${{ env.TAG }}
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
