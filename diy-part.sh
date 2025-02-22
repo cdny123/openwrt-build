@@ -1,14 +1,17 @@
 #!/bin/bash
-set -e
+# 1. 添加自定义软件源
+cd package
+git clone https://github.com/cdny123/openwrt-package1.git
 
-# 添加自定义软件源
-echo "src-git custom1 https://github.com/cdny123/openwrt-package1.git" >> feeds.conf.default
-echo "src-git luci-app-lucky https://github.com/sirpdboy/luci-app-lucky.git" >> feeds.conf.default
-echo "src-git luci-app-autoupdate https://github.com/lq-wq/luci-app-autoupdate.git" >> feeds.conf.default
-echo "src-git luci-app-dockerman https://github.com/Jason6111/luci-app-dockerman.git" >> feeds.conf.default
-echo "src-git luci-theme-kucat https://github.com/sirpdboy/luci-theme-kucat.git" >> feeds.conf.default
-echo "src-git luci-theme-infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom.git" >> feeds.conf.default
-echo "src-git luci-theme-argon https://github.com/jerrykuku/luci-theme-argon.git" >> feeds.conf.default
+# 2. 添加自定义软件包
+git clone https://github.com/sirpdboy/luci-app-lucky.git
+git clone https://github.com/lq-wq/luci-app-autoupdate.git
+git clone https://github.com/Jason6111/luci-app-dockerman.git
+
+# 添加自定义主题
+git clone https://github.com/sirpdboy/luci-theme-kucat.git
+git clone https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom.git
+git clone https://github.com/jerrykuku/luci-theme-argon.git
 
 # 更换固件内核为6.6
 sed -i 's/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=6.6/g' target/linux/x86/Makefile
