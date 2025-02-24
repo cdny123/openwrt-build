@@ -48,17 +48,6 @@ git clone https://github.com/jerrykuku/luci-theme-argon.git
 echo "Completed Step 3.3"
 check_command "Cloning luci-theme-argon"
 
-# 更换固件内核为指定版本
-echo "Step 4: Changing firmware kernel version..."
-if [ -f "target/linux/x86/Makefile" ]; then
-    sed -i "s/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=${KERNEL_VERSION}/g" target/linux/x86/Makefile
-    echo "Completed Step 4"
-    check_command "Changing kernel version"
-else
-    echo "Error: target/linux/x86/Makefile not found."
-    exit 1
-fi
-
 # 添加个性签名, 默认增加年月日
 echo "Step 5: Adding custom signature..."
 mkdir -p package/base-files/files/etc
