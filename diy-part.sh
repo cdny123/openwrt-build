@@ -109,7 +109,7 @@ check_command "Installing feeds"
 
 # 运行 OpenWrt 编译
 echo "Step 13: Building OpenWrt image..."
-make image PROFILE="generic" PACKAGES="luci luci-ssl htop iw iwinfo openssh-sftp-server openvpn-openssl wpad-openssl irqbalance schedtool usbutils lm-sensors luci-app-adguardhome luci-app-alist luci-app-ttyd"
+make image PROFILE="generic" PACKAGES="luci luci-ssl htop iw iwinfo openssh-sftp-server openvpn-openssl wpad-openssl irqbalance schedtool usbutils lm-sensors luci-app-adguardhome luci-app-alist luci-app-argon-config luci-app-cpufreq luci-app-docker luci-app-filetransfer luci-app-frpc luci-app-nlbwmon luci-app-ramfree luci-app-samba luci-app-ttyd luci-app-upnp luci-app-vlmcsd luci-app-wol luci-app-zerotier"
 echo "Completed Step 13"
 check_command "Building OpenWrt image"
 
