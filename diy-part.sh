@@ -23,9 +23,6 @@ check_command "Cloning openwrt-package1"
 git clone https://github.com/sirpdboy/luci-app-lucky.git
 check_command "Cloning luci-app-lucky"
 
-git clone https://github.com/lq-wq/luci-app-autoupdate.git
-check_command "Cloning luci-app-autoupdate"
-
 git clone https://github.com/Jason6111/luci-app-dockerman.git
 check_command "Cloning luci-app-dockerman"
 
