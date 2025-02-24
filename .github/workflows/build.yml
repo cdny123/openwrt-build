@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.4.0
 
       - name: Clean up old Actions runs
         run: |
@@ -28,7 +28,7 @@ jobs:
     needs: cleanup
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.4.0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -38,10 +38,8 @@ jobs:
           mkdir -p output
           docker build -t openwrt-build .
           docker run --rm -v $(pwd)/output:/build/output openwrt-build
-          # 列出生成的文件以进行调试
           echo "Generated files in output/ directory:"
           ls -lah output/
-          # 重命名生成的固件文件
           for file in output/*; do
             mv "$file" "output/$(basename "$file" | sed 's/^/x86_64-$(date +%Y%m%d)-/')"
           done
