@@ -14,6 +14,7 @@ OPENCLASH_URL="https://github.com/vernesong/OpenClash/releases/download/TUN-Prem
 ADGUARDHOME_URL="https://github.com/AdguardTeam/AdGuardHome/releases/latest/download/AdGuardHome_linux_amd64.tar.gz"
 
 # 1. 添加自定义软件源
+mkdir -p package
 cd package || exit
 git clone https://github.com/cdny123/openwrt-package1.git
 check_command "Cloning openwrt-package1"
